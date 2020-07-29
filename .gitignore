@@ -1,1 +1,5 @@
 *.rda
+*.R.un~
+*.md.un~
+*.csv
+*.pdf
