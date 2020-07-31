@@ -3,3 +3,6 @@
 *.md.un~
 *.csv
 *.pdf
+*.Rproj
+*.Rproj.user
+*.txt
