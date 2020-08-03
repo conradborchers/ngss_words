@@ -31,25 +31,27 @@ full_data$year <- as.integer(substring(full_data$created_at, 0, 4))
 search_words <- tribble(
   ~word, ~principle,
   "cross-cutting", NA,
-  "patterns", 1,
+  "pattern", 1,
   "cause", 2,
   "effect", 2,
   "scale", 3,
   "proportion", 3,
   "quantity", 3,
-  "systems", 4,
-  "system models", 4,
+  "system", 4,
+  "system model", 4,
   "energy", 5,
   "matter", 5,
-  "flows", 5,
+  "flow", 5,
   "conservation", 5,
   "structure", 6,
   "function", 6,
   "stability", 7,
+  "stable", 7,
   "change", 7
 )
 search_words
-
+## NOTE: work on search terms stemming and matching
+## NOTE: work with n-grams for content of principles
 
 #### Top Words ####
 
@@ -64,14 +66,16 @@ top_words <- tidy_data %>%
   unnest_tokens(word, text) %>%
   anti_join(stop_words) %>%
   mutate(word = textstem::lemmatize_words(word)) %>%
-  count(word, sort = TRUE)
-top_words
+  # group_by(year) %>%
+  count(word, sort = TRUE) # %>%
+  # arrange(year, desc(n))
 
 
 #### Search Words Frequencies ####
 
 # frequencies of search words from top_words
 search_words <- left_join(search_words, top_words, by = "word")
+
 
 
 #### Code from sentiment.R ####
