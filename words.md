@@ -193,20 +193,20 @@ critical elements of study.
 
 # Common abbreviations (> 250 times used)
 
-* sci
-* ccc(s)
-* pln
-* nsta
-* ct
-* k12
-* ela
-* dcis
-* rts
-* bio
-* mi
-* cer
-* dci
-* pst
+* sci -> science
+* ccc(s) -> cross-cutting concepts
+* pln -> professional learning network
+* nsta -> national science teacher association 
+* ct -> time
+* k12 -> self-explanatory
+* ela -> english language learner (?)
+* dcis -> disciplinary-core ideas  ||  look up in tweets -> framework-related?
+* rts -> 
+* bio -> biology or Twitter bio
+* mi -> Michigan (?) || look up; state data cross-check
+* cer -> claim-evidenced reasoning
+* dci -> disciplinary core ideas -> search terms
+* pst -> pre-service teacher / time zone -> check
 
 # TODO
 

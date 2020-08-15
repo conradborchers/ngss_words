@@ -59,7 +59,7 @@ math_comp <- list(
   "abstract thinking",
   "symbolic abstraction",
   "mathematical abstraction"
-  
+   # math; wordstems
 )
 
 expl_sol <- list(
