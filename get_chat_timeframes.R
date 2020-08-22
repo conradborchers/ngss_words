@@ -4,17 +4,20 @@ setwd("C:/Users/conra/Documents/GitHub/ngss_words")
 
 library(magrittr)
 library(lubridate)
+library(rtweet)
 
 load("NGSSchat_sentiment_states_revised.rda")
 
-# Select 500 most busy hours in data set
+# ind <- grep("Welcome to #NGSSchat", tweets_dl$text)
+
+# Select 1,000 most busy hours in data set
 
 time <- tweets_dl$created_at
 time <- format(time, format="%Y-%m-%d %H")
 
 freq <- table(time) 
 freq <- sort(freq, decreasing = T)
-freq <- freq %>% head(500) 
+freq <- freq %>% head(1000) 
 
 hours <- names(freq)
 
@@ -178,19 +181,28 @@ for (i in 1:length(isChat)){
 
 tweets_dl$isChat <- isChat
 
-ind <- grep("#hsNGSS", tweets_dl$text)  
+# Setting isChat to 0 where hsNGSSchat is ongoing for possible overlap where isChat = 1
 
-isHS <- rep(0, nrow(tweets_dl))
+ind <- grep("#hsNGSSchat", tweets_dl[tweets_dl$isChat == 1,]$text)  
 
-for (i in 1:length(isHS)){
-  if (i %in% ind){
-    isHS[i] <- 1
-  }
-}
+tweets_dl[tweets_dl$isChat == 1,]$created_at[ind]   # for overview on dates
 
-tweets_dl$isHS <- isHS
+# index 24,223: user tweeted #hsNGSSchat in a regular chat at random, no changing
 
-ind <- which(tweets_dl$isChat == 1 & tweets_dl$isHS == 1)  
-ind                                                       # 6 chats might need to be cleaned of HS NGSS chat if needed
+tweets_dl[tweets_dl$isChat == 1,]$text[(ind[1]-20):(ind[1]+5)]
 
+# index 25,169 to 25,400: a few mentiones of hsNGSSchat at the beginning of NGSSchat session, no changing
 
+tweets_dl[tweets_dl$isChat == 1,]$text[25169:25200]
+
+# index 26,271 to 26,402: yet few tweets are overlap with the end of hsNGSSchat and NGSSchat, no changing
+
+tweets_dl[tweets_dl$isChat == 1,]$text[(26271-10):(26402+10)]
+
+## ... taking a look at the dates of creation of the overlapping tweets, there seems to be only 
+##     overlap at the beginning of NGSSchat sessions following right after hsNGSSchat
+
+length(ind)   # only 33 mentions of hsNGSSchat in declared NGSSchat sessions
+
+write_as_csv(tweets_dl, "CB2020_08_22_NGSSChat_chats.csv")
+save(isChat, file="isChat.rda")
